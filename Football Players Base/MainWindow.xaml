@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Football_Players_Base"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Football Players Base" Height="450" Width="800">
+        Title="FootballPlayersBase" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="LightGray"/>
