@@ -20,9 +20,21 @@ namespace Football_Players_Base
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<int> ageList;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            ageList = new List<int>();
+
+            for (int i = 15; i <=55; i++)
+            {
+                ageList.Add(i);
+            }
+            age.ItemsSource = ageList;
+            age.SelectedValue = 25;
+
         }
     }
 }

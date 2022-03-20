@@ -5,8 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Football_Players_Base"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        ResizeMode="NoResize"
+        Title="Football Players Base" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Margin" Value="0,20,60,20"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="40,5,40,5"/>
+        </Style>
+    </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="3.5*"/>
+        </Grid.ColumnDefinitions>
         
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" TextAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap">Forename:</TextBlock>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" TextAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap">Surname:</TextBlock>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" TextAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap">Age:</TextBlock>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" TextAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap">Weight:</TextBlock>
+
+        <TextBox Grid.Row="0" Grid.Column="1"/>
+
+        <TextBox Grid.Row="1" Grid.Column="1"/>
+
+        <ComboBox Name="age" Grid.Row="2" Grid.Column="1" Margin="0,20,180,20"/>
+
+        <Slider Name="weight" Grid.Row="3" Grid.Column="1" Minimum="55" Maximum="100" VerticalAlignment="Center" Margin="10" TickFrequency="0.1" IsSnapToTickEnabled="True"/>
+
+        <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal">
+            <TextBlock Name="weight_number" VerticalAlignment="Center" Text="{Binding ElementName=weight, Path=Value}" />
+            <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="kg"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="4" Grid.Column="1" Margin="0,20,0,0">
+            <Button Content="Add"/>
+            <Button Content="Delete"/>
+            <Button Content="Modify"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" Orientation="Vertical">
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+        </StackPanel>
     </Grid>
 </Window>
