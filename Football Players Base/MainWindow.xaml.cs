@@ -20,6 +20,7 @@ namespace Football_Players_Base
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<Player> playersList;
         private List<int> ageList;
 
         public MainWindow()
