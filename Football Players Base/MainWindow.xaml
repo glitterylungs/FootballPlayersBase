@@ -40,9 +40,9 @@
 
         <TextBlock Grid.Row="3" Grid.Column="0" TextAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap">Weight:</TextBlock>
 
-        <TextBox Grid.Row="0" Grid.Column="1"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Name="forenameTextBox"/>
 
-        <TextBox Grid.Row="1" Grid.Column="1"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="surnameTextBox"/>
 
         <ComboBox Name="age" Grid.Row="2" Grid.Column="1" Margin="0,20,180,20"/>
 
@@ -54,15 +54,13 @@
         </StackPanel>
         
         <StackPanel Grid.Row="4" Grid.Column="1" Margin="0,20,0,0">
-            <Button Content="Add"/>
-            <Button Content="Delete"/>
-            <Button Content="Modify"/>
+            <Button Content="Add" Name="addButton" Click="addButton_Click"/>
+            <Button Content="Delete" Name="deleteButton" Click="deleteButton_Click"/>
+            <Button Content="Modify" Name="modifyButton"/>
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" Orientation="Vertical" Margin="10,0,0,0">
-            <TextBlock Text="test"/>
-            <TextBlock Text="test"/>
-            <TextBlock Text="test"/>
+            <ListBox Name="listBox" Margin="10" SelectionChanged="listBoxSelectionChanged"/>
         </StackPanel>
     </Grid>
 </Window>

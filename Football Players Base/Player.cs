@@ -8,7 +8,14 @@ namespace Football_Players_Base
 {
     internal class Player
     {
-        public string forename { get; set; }
+        private string forename;
+
+        internal string Forename
+        {
+            get { return forename; }
+            set { forename = value; }
+        }
+
         public string surname { get; set; }
         public int age { get; set; }
         public double weight { get; set; }
