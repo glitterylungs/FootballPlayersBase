@@ -29,7 +29,7 @@ namespace Football_Players_Base
 
             ageList = new List<int>();
 
-            for (int i = 15; i <=55; i++)
+            for (int i = 15; i <=55; i++) // uzupełnienie comboboxa wartościami
             {
                 ageList.Add(i);
             }
@@ -44,6 +44,13 @@ namespace Football_Players_Base
             {
                 Player player = new Player(forenameTextBox.Text.ToString(), surnameTextBox.Text.ToString(), Int32.Parse(age.Text), Double.Parse(weight_number.Text.ToString().Replace(".",",")));
                 listBox.Items.Add(player);
+
+                listBox.SelectedItem = null;
+
+                forenameTextBox.Text = ""; //wyczyszczenie pol po dodaniu wartości do listbox
+                surnameTextBox.Text = "";
+                age.SelectedValue = 25;
+                weight.Value = 55;
             }
         }
 
@@ -53,7 +60,7 @@ namespace Football_Players_Base
         }
 
 
-        private void listBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void listBoxSelectionChanged(object sender, SelectionChangedEventArgs e) //po wybraniu wartosci w listbox wpisanie jej do pól
         {
             Player selectedValue = listBox.SelectedItem as Player;
             if (selectedValue != null)
@@ -66,6 +73,29 @@ namespace Football_Players_Base
             else
             {
                 forenameTextBox.Text = "";
+                surnameTextBox.Text = "";
+                age.SelectedValue = 25;
+                weight.Value = 55;
+            }
+        }
+
+        private void modifyButton_Click(object sender, RoutedEventArgs e)
+        {
+            Player selectedValue = listBox.SelectedItem as Player;
+            if (selectedValue != null)
+            {
+                selectedValue.Forename = forenameTextBox.Text;
+                selectedValue.surname = surnameTextBox.Text;
+                selectedValue.age = Int32.Parse(age.Text);
+                selectedValue.weight = weight.Value;
+                listBox.Items.Refresh();
+
+                listBox.SelectedItem = null;
+
+                forenameTextBox.Text = "";
+                surnameTextBox.Text = "";
+                age.SelectedValue = 25;
+                weight.Value = 55;
             }
         }
     }
