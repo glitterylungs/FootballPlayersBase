@@ -25,78 +25,129 @@ namespace Football_Players_Base
 
         public MainWindow()
         {
+            TextBoxWithErrorProvider.BrushForAll = Brushes.Red;
             InitializeComponent();
 
-            ageList = new List<int>();
-
-            for (int i = 15; i <=55; i++) // uzupełnienie comboboxa wartościami
+            try
             {
-                ageList.Add(i);
-            }
-            age.ItemsSource = ageList;
-            age.SelectedValue = 25;
+                ageList = new List<int>();
 
+                for (int i = 15; i <= 55; i++) // uzupełnienie comboboxa wartościami
+                {
+                    ageList.Add(i);
+                }
+                age.ItemsSource = ageList;
+                age.SelectedValue = 25;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            if (forenameTextBox.Text.ToString().Trim() != "" && surnameTextBox.Text.ToString().Trim() != "")
+            try
             {
-                Player player = new Player(forenameTextBox.Text.ToString(), surnameTextBox.Text.ToString(), Int32.Parse(age.Text), Double.Parse(weight_number.Text.ToString().Replace(".",",")));
-                listBox.Items.Add(player);
+                if (isNoEmpty(forenameTextBox) & isNoEmpty(surnameTextBox)) 
+                {
+                    Player player = new Player(forenameTextBox.Text.ToString(), surnameTextBox.Text.ToString(), Int32.Parse(age.Text), Double.Parse(weight_number.Text.ToString().Replace(".", ",")));
+                    listBox.Items.Add(player);
 
-                listBox.SelectedItem = null;
+                    listBox.SelectedItem = null;
 
-                forenameTextBox.Text = ""; //wyczyszczenie pol po dodaniu wartości do listbox
-                surnameTextBox.Text = "";
-                age.SelectedValue = 25;
-                weight.Value = 55;
+                    forenameTextBox.Text = ""; //wyczyszczenie pol po dodaniu wartości do listbox
+                    surnameTextBox.Text = "";
+                    age.SelectedValue = 25;
+                    weight.Value = 55;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            listBox.Items.Remove(listBox.SelectedItem);
+            try
+            {
+                listBox.Items.Remove(listBox.SelectedItem);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 
         private void listBoxSelectionChanged(object sender, SelectionChangedEventArgs e) //po wybraniu wartosci w listbox wpisanie jej do pól
         {
-            Player selectedValue = listBox.SelectedItem as Player;
-            if (selectedValue != null)
+            try
             {
-                forenameTextBox.Text = selectedValue.Forename;
-                surnameTextBox.Text = selectedValue.surname;
-                age.Text = selectedValue.age.ToString();
-                weight.Value = selectedValue.weight;
+                Player selectedValue = listBox.SelectedItem as Player;
+                if (selectedValue != null)
+                {
+                    forenameTextBox.Text = selectedValue.Forename;
+                    surnameTextBox.Text = selectedValue.surname;
+                    age.Text = selectedValue.age.ToString();
+                    weight.Value = selectedValue.weight;
+                }
+                else
+                {
+                    forenameTextBox.Text = "";
+                    surnameTextBox.Text = "";
+                    age.SelectedValue = 25;
+                    weight.Value = 55;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                forenameTextBox.Text = "";
-                surnameTextBox.Text = "";
-                age.SelectedValue = 25;
-                weight.Value = 55;
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void modifyButton_Click(object sender, RoutedEventArgs e)
         {
-            Player selectedValue = listBox.SelectedItem as Player;
-            if (selectedValue != null)
+            try
             {
-                selectedValue.Forename = forenameTextBox.Text;
-                selectedValue.surname = surnameTextBox.Text;
-                selectedValue.age = Int32.Parse(age.Text);
-                selectedValue.weight = weight.Value;
-                listBox.Items.Refresh();
+                Player selectedValue = listBox.SelectedItem as Player;
+                if (selectedValue != null)
+                {
+                    selectedValue.Forename = forenameTextBox.Text;
+                    selectedValue.surname = surnameTextBox.Text;
+                    selectedValue.age = Int32.Parse(age.Text);
+                    selectedValue.weight = weight.Value;
+                    if (isNoEmpty(forenameTextBox) & isNoEmpty(surnameTextBox))
+                    {
+                        listBox.Items.Refresh();
 
-                listBox.SelectedItem = null;
+                        listBox.SelectedItem = null;
 
-                forenameTextBox.Text = "";
-                surnameTextBox.Text = "";
-                age.SelectedValue = 25;
-                weight.Value = 55;
+                        forenameTextBox.Text = "";
+                        surnameTextBox.Text = "";
+                        age.SelectedValue = 25;
+                        weight.Value = 55;
+                    }
+
+                   
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private bool isNoEmpty(TextBoxWithErrorProvider tb)
+        {
+            if (tb.Text.Trim() == "")
+            {
+                tb.SetError("Fill in the field");
+                return false;
+            }
+            tb.SetError("");
+            return true;
         }
     }
 }
