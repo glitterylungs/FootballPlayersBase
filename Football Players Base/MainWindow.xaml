@@ -14,12 +14,13 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="114*"/>
+            <ColumnDefinition Width="229*"/>
+            <ColumnDefinition Width="57*"/>
+            <ColumnDefinition Width="398*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition Width="3.5*"/>
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -36,26 +37,26 @@
 
         <TextBlock Grid.Row="3" Grid.Column="0" TextAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap">Weight:</TextBlock>
 
-        <local:TextBoxWithErrorProvider Grid.Row="0" Grid.Column="1" x:Name="forenameTextBox" Margin="0,20,60,20"/>
+        <local:TextBoxWithErrorProvider Grid.Row="0" x:Name="forenameTextBox" Margin="114,20,60,20" Grid.ColumnSpan="2"/>
 
-        <local:TextBoxWithErrorProvider Grid.Row="1" Grid.Column="1" x:Name="surnameTextBox" Margin="0,20,60,20"/>
+        <local:TextBoxWithErrorProvider Grid.Row="1" x:Name="surnameTextBox" Margin="114,20,60,20" Grid.ColumnSpan="2"/>
 
-        <ComboBox Name="age" Grid.Row="2" Grid.Column="1" Margin="0,20,180,20"/>
+        <ComboBox Name="age" Grid.Row="2" Margin="114,20,180,20" Grid.ColumnSpan="2"/>
 
-        <Slider Name="weight" Grid.Row="3" Grid.Column="1" Minimum="55" Maximum="100" VerticalAlignment="Center" Margin="10" TickFrequency="0.1" IsSnapToTickEnabled="True"/>
+        <Slider Name="weight" Grid.Row="3" Grid.Column="1" Minimum="55" Maximum="100" VerticalAlignment="Center" Margin="10,0,10,0" TickFrequency="0.1" IsSnapToTickEnabled="True"/>
 
-        <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" Margin="0,62,0,0" Grid.RowSpan="2">
             <TextBlock Name="weight_number" VerticalAlignment="Center" Text="{Binding ElementName=weight, Path=Value}" />
             <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="kg"/>
         </StackPanel>
-        
-        <StackPanel Grid.Row="4" Grid.Column="1" Margin="0,20,0,0">
+
+        <StackPanel Grid.Row="4" Margin="114,20,57,0" Grid.ColumnSpan="3">
             <Button Content="Add" Name="addButton" Click="addButton_Click"/>
             <Button Content="Delete" Name="deleteButton" Click="deleteButton_Click"/>
             <Button Content="Modify" Name="modifyButton" Click="modifyButton_Click"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" Orientation="Vertical" Margin="10,0,0,0">
+        <StackPanel Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" Orientation="Vertical" Margin="10,0,0,0" Grid.ColumnSpan="2">
             <ListBox Name="listBox" Margin="10" SelectionChanged="listBoxSelectionChanged"/>
         </StackPanel>
     </Grid>

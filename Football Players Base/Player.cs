@@ -10,7 +10,7 @@ namespace Football_Players_Base
     {
         private string forename;
 
-        internal string Forename
+        public string Forename
         {
             get { return forename; }
             set { forename = value; }

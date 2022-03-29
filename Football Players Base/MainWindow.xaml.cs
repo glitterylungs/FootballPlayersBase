@@ -12,24 +12,35 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.Json;
+using System.IO;
+
+
 
 namespace Football_Players_Base
+
 {
     /// <summary>
     /// Logika interakcji dla klasy MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<Player> playersList; //do wczytywania z pliku
+        private string fileName = "C:/Users/ja/source/repos/Football Players Base/Football Players Base/footballPlayersData.json";
         private List<int> ageList;
 
         public MainWindow()
         {
             TextBoxWithErrorProvider.BrushForAll = Brushes.Red;
+
             InitializeComponent();
 
-            try
+            string jsonString = File.ReadAllText(fileName);
+            List<Player> playersList = JsonSerializer.Deserialize<List<Player>>(jsonString);
+            foreach(Player player in playersList)
             {
+                listBox.Items.Add(player);
+            }
+
                 ageList = new List<int>();
 
                 for (int i = 15; i <= 55; i++) // uzupełnienie comboboxa wartościami
@@ -38,11 +49,20 @@ namespace Football_Players_Base
                 }
                 age.ItemsSource = ageList;
                 age.SelectedValue = 25;
-            }
-            catch (Exception ex)
+
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
+        }
+
+        private void OnProcessExit(object sender, EventArgs e)
+        {
+            List<Player> playersList = new List<Player>();
+
+            foreach (Player player in listBox.Items)
             {
-                MessageBox.Show(ex.Message);
+                playersList.Add(player);
             }
+            var jsonString = JsonSerializer.Serialize(playersList);
+            File.WriteAllText(fileName, jsonString);
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)
@@ -52,6 +72,7 @@ namespace Football_Players_Base
                 if (isNoEmpty(forenameTextBox) & isNoEmpty(surnameTextBox)) 
                 {
                     Player player = new Player(forenameTextBox.Text.ToString(), surnameTextBox.Text.ToString(), Int32.Parse(age.Text), Double.Parse(weight_number.Text.ToString().Replace(".", ",")));
+                    
                     listBox.Items.Add(player);
 
                     listBox.SelectedItem = null;
@@ -149,5 +170,6 @@ namespace Football_Players_Base
             tb.SetError("");
             return true;
         }
+
     }
 }
